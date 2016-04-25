@@ -3,6 +3,7 @@ package gologging
 import (
 	"fmt"
 	"log"
+	"os"
 	"time"
 )
 
@@ -30,6 +31,11 @@ func New(owner string) Logger {
 	l := new(logger)
 	l.owner = owner
 	return l
+}
+
+func SetOutput(file string) {
+	logFile, _ := os.OpenFile(file, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	log.SetOutput(logFile)
 }
 
 func (l logger) Debug(message string, args ...interface{}) {
