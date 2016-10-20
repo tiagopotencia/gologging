@@ -60,7 +60,6 @@ func (l logger) logMessage(level string, message string, args ...interface{}) {
 	if len(args) > 0 {
 		logMes += "||["
 		for i, arg := range args {
-			fmt.Println(fmt.Sprint(arg))
 			logMes += fmt.Sprint(arg)
 			if i < (len(args) - 1) {
 				logMes += ","
