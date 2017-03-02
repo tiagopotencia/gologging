@@ -19,7 +19,7 @@ const (
 	debug = "debug"
 	info  = "info"
 	warn  = "warn"
-	Error = "Error"
+	Error = "error"
 	fatal = "fatal"
 )
 
