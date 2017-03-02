@@ -34,7 +34,12 @@ func New(owner string) Logger {
 }
 
 func SetOutput(file string) {
-	logFile, _ := os.OpenFile(file, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	logFile, err := os.OpenFile(file, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+
+	if err != nil {
+		panic("Could not be possible to create file at " + file + "\nerr: " + err.Error())
+	}
+
 	log.SetOutput(logFile)
 }
 
