@@ -19,7 +19,7 @@ const (
 	debug = "debug"
 	info  = "info"
 	warn  = "warn"
-	error = "error"
+	Error = "Error"
 	fatal = "fatal"
 )
 
@@ -33,14 +33,16 @@ func New(owner string) Logger {
 	return l
 }
 
-func SetOutput(file string) {
+func SetOutput(file string) error {
 	logFile, err := os.OpenFile(file, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 
 	if err != nil {
-		panic("Could not be possible to create file at " + file + "\nerr: " + err.Error())
+		return err
 	}
 
 	log.SetOutput(logFile)
+
+	return nil
 }
 
 func (l logger) Debug(message string, args ...interface{}) {
@@ -53,7 +55,7 @@ func (l logger) Warn(message string, args ...interface{}) {
 	l.logMessage(warn, message, args...)
 }
 func (l logger) Error(message string, args ...interface{}) {
-	l.logMessage(error, message, args...)
+	l.logMessage(Error, message, args...)
 
 }
 func (l logger) Fatal(message string, args ...interface{}) {
