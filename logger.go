@@ -45,6 +45,23 @@ func SetOutput(file string) error {
 	return nil
 }
 
+func SetOutputPerTime(fileNameWithoutExtension string) error {
+
+	now := time.Now()
+
+	logName := fileNameWithoutExtension + now.Format("2006-01-02") + ".log"
+
+	logFile, err := os.OpenFile(logName, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+
+	if err != nil {
+		return err
+	}
+
+	log.SetOutput(logFile)
+
+	return nil
+}
+
 func (l logger) Debug(message string, args ...interface{}) {
 	l.logMessage(debug, message, args...)
 }
